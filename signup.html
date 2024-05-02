@@ -32,39 +32,9 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-		<!-- <div class="row">
-			<div class="col-12" id="preloader">
-
-			</div>
-		</div> -->
-	</div>
+   
     <div id="sos"></div>
-    <!-- OTP Verification Modal -->
-    <div class="modal fade" id="otpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">
-                        Verify your OTP hello world
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="otp-verify-close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="number" id="modal-btn" title="Enter OTP" placeholder="Enter OTP" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="submit-modal-btn" class="btn">
-                        Verify
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End of OTP Verification Modal -->
+
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -95,7 +65,7 @@
                 <div class="card card-signin my-5">
                     <div class="card-body">
                         <h5 class="card-title text-center">Sign Up</h5>
-                        <form class="form-signin">
+                        <form class="form-signin" id="signup-form">
                             <!-- Name -->
                             <div class="form-label-group" style="margin-top: 40px;">
                                 <input type="text" id="name" class="form-control" placeholder="Name" required
@@ -108,46 +78,7 @@
                                     onfocus="purple(event)" required style=" border: 2px solid #961e47;"/>
                                 <label id="labelEmail" for="email">Email Address</label>
                             </div>
-                            <!-- Contact -->
-                            <div class="form-label-group">
-                                <input type="tel" id="phone" class="form-control" placeholder="Contact Number"
-                                    onfocus="purple(event)" required style=" border: 2px solid #961e47;"/>
-                                <label id="labelPhone" for="phone">Contact Number</label>
-                            </div>
-                            <h6 id="postotp"
-                                style="text-decoration: underline; color: #961e47; padding-left: 18px; padding-bottom: 10px; cursor: pointer;">
-                                Verify contact number
-                            </h6>
-                            <!-- State and City - Location Details -->
-                            <div class="row form-label-group">
-                                <input type="hidden" class="form-control" name="country" id="countryId" value="IN" style=" border: 2px solid #961e47;"/>
-                                <div class="col-6">
-                                    <select name="state" class="states order-alpha" id="stateId" style=" border: 2px solid #961e47;"
-                                        onfocus="purple(event)">
-                                        <option value="">Select State</option>
-                                    </select>
-                                </div>
-                                <div class="col-6">
-                                    <select name="city" class="cities order-alpha" id="cityId" onfocus="purple(event)" style=" border: 2px solid #961e47;">
-                                        <option value="">Select City</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- Profession -->
-                            <div class="form-label-group">
-                                <input type="text" id="prof" class="form-control" placeholder="Your Profession"
-                                    onfocus="purple(event)" required style=" border: 2px solid #961e47;"/>
-                                <label id="labelProf" for="prof">Your Profession</label>
-                            </div>
-                            <!-- Profile Picture -->
-                            <div class="form-label-group">
-                                <input type="file" id="profile" placeholder="Profile Picture"
-                                    onfocus="purple(event)" required style="display: none;" style=" border: 2px solid #961e47;"/>
-                                <input type="button" id="new-upload-btn" class="form-control" value="Choose File"
-                                    style="width: 100%; background-color: white; border: 2px solid #961e47;"
-                                    onclick="document.getElementById('profile').click();" />
-                                <label id="labelProfile" for="profile">Profile Picture</label>
-                            </div>
+                            
                             <!-- Password -->
                             <div class="form-label-group">
                                 <input type="password" id="password" class="form-control" placeholder="Password" style=" border: 2px solid #961e47;"
@@ -156,9 +87,47 @@
                             </div>
                             <!-- Signup button -->
                             <div style="text-align: center;">
-                                <input class="btn btn-lg text-uppercase" value="Sign Up" id="sub" type="button" />
+                                <input class="btn btn-lg text-uppercase" value="Sign Up" id="sub" type="button"
+                                    onclick="signUp()" />
                             </div>
                         </form>
+
+                        <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+                        <script>
+                            var firebaseConfig = {
+                                apiKey: "AIzaSyDLmjvfacb2vJjYNN2GA4topErCJHxZCxk",
+                                authDomain: "pragati-88314.firebaseapp.com",
+                               
+                                projectId: "pragati-88314",
+                                storageBucket: "pragati-88314.appspot.com",
+                                messagingSenderId: "732443686012",
+                                appId: "1:732443686012:web:56b0f12453c5f2a02c45f9",
+                                measurementId: "G-GDDQGKNCHT"
+                            };
+                            firebase.initializeApp(firebaseConfig);
+
+                            function signUp() {
+                                var name = document.getElementById('name').value;
+                                var email = document.getElementById('email').value;
+                                var password = document.getElementById('password').value;
+
+                                firebase.auth().createUserWithEmailAndPassword(email, password)
+                                    .then((userCredential) => {
+                                        var user = userCredential.user;
+                                        user.updateProfile({
+                                            displayName: name
+                                        }).then(() => {
+                                            alert("Sign Up Successful");
+                                            window.location.href = 'login.html';
+                                        }).catch((error) => {
+                                            alert(error.message);
+                                        });
+                                    }).catch((error) => {
+                                        alert(error.message);
+                                    });
+                            }
+                        </script>
                     </div>
                 </div>
             </div>

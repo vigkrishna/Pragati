@@ -33,13 +33,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-		<!-- <div class="row">
-			<div class="col-12" id="preloader">
-
-			</div>
-		</div> -->
-	</div>
+   
     <div id="sos"></div>
     <div id="main-page">
 
@@ -61,7 +55,7 @@
                             PRODUCTS
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="buy-products.html">Buy Products</a>
+                            <!-- <a class="dropdown-item" href="buy-products.html">Buy Products</a> -->
                             <a class="dropdown-item" href="sell-products.html">Sell Products</a>
                         </div>
                     </li>
@@ -71,7 +65,7 @@
                             SERVICES
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="seek-services.html">Need Services</a>
+                            <!-- <a class="dropdown-item" href="seek-services.html">Need Services</a> -->
                             <a class="dropdown-item" href="post-services.html">Post Services</a>
                         </div>
                     </li>
@@ -102,95 +96,137 @@
         </nav>
         <!-- End of Navbar -->
 
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyC_YQlkIu6h2XWuOV3f_V4X336G03wE1a8",
+                authDomain: "pragati-65cdb.firebaseapp.com",
+                databaseURL: "https://pragati-88314-default-rtdb.firebaseio.com",
+                projectId: "pragati-65cdb",
+                storageBucket: "pragati-65cdb.appspot.com",
+                messagingSenderId: "12087207745",
+                appId: "1:12087207745:web:35542412eb0383e3062cb9",
+                measurementId: "G-V1WNB0PW6S"
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+            // Get a reference to the database service
+            var database = firebase.database();
+        </script>
+
         <div class="container-fluid">
-            <div class="row" style="padding-top: 10px;">
-                <div class="col-12 col-lg-5 order-lg-2">
-                    <div class="col-12" style="text-align: center;">
+            <div class="row" style="padding-top: 2px; display: flex; justify-content: center;">
+                <div class="col-12 col-lg-12 order-lg-7" style="display: flex; flex-direction: column; align-items: center;">
+                  
+                    <div class="col-3" style="text-align: center;">
                         <h2 style="color: #961e47;">Sell Products</h2>
                         <h5 style="padding-top: 10px;">
                             Post your handmade products on Pragati for sale
                         </h5>
                     </div>
-                    <div class="row">
-                        <!-- Name -->
+                    <form id="sell-product-form" style="margin: 0 auto">
                         <div class="col-6">
                             <label id="labelName" for="name">Product Name<sup>*</sup></label>
-                            <input type="text" id="prodName" onfocus="purple(event)" name="" style="width: 100%;"
-                                title="Product name" />
+                            <input type="text" id="prodName" onfocus="purple(event)" name="name" style="width: 100%;" title="Product name" />
                         </div>
-                        <!-- Category -->
                         <div class="col-6">
+                            <label id="labelCategory" for="category">Category<sup>*</sup></label>
                             <div class="dropdown" style="padding-top: 21px;">
-                                <select class="form-control category-btn" id="categoryList">
-                                    <option value="none" selected disabled hidden>
-                                        Your category*
-                                    </option>
-                                    <option>Pottery</option>
-                                    <option>Decorative Artifacts</option>
-                                    <option>Embroidered Materials</option>
-                                    <option>Knitting/Weaving</option>
-                                    <option>Healthy home-made snacks</option>
-                                    <option>Handicrafts</option>
-                                    <option>Jewellery</option>
-                                    <option>Paintings</option>
-                                    <option>Baking</option>
-                                    <option>Other</option>
+                                <select class="form-control category-btn" id="categoryList" name="category">
+                                    <option value="none" selected disabled hidden>Select Category*</option>
+                                    <option value="Pottery">Pottery</option>
+                                    <option value="Decorative Artifacts">Decorative Artifacts</option>
+                                    <option value="Embroidered Materials">Embroidered Materials</option>
+                                    <option value="Knitting/Weaving">Knitting/Weaving</option>
+                                    <option value="Healthy home-made snacks">Healthy home-made snacks</option>
+                                    <option value="Handicrafts">Handicrafts</option>
+                                    <option value="Jewellery">Jewellery</option>
+                                    <option value="Paintings">Paintings</option>
+                                    <option value="Baking">Baking</option>
+                                    <option value="Other">Other</option>
                                 </select>
                             </div>
                         </div>
-                        <!-- Description -->
                         <div class="col-12">
                             <label id="labelDesc" for="description">Product Description<sup>*</sup></label>
-                            <textarea id="prodDesc" onfocus="purple(event)" style="width: 100%; min-height: 100px;"
-                                title="Prod description"></textarea>
+                            <textarea id="prodDesc" onfocus="purple(event)" style="width: 100%; min-height: 100px;" name="description" title="Prod description"></textarea>
                         </div>
-                        <!-- Price -->
+                        <div class="col-6">
+                            <label id="labelPrice" for="price">Product Images Drive Link<sup>*</sup></label>
+                            <textarea id="Dlink" onfocus="purple(event)" id="Dlink" name="price" style="width: 100%;" title="Drive Link" ></textarea>
+                        </div>
                         <div class="col-6">
                             <label id="labelPrice" for="price">Product Price<sup>*</sup></label>
-                            <input type="number" onfocus="purple(event)" id="prodPrice" name="" style="width: 100%;"
-                                title="Product price" />
+                            <input type="number" onfocus="purple(event)" id="prodPrice" name="price" style="width: 100%;" title="Product price" />
                         </div>
-                        <!-- Negotiable price -->
                         <div class="col-6">
                             <div class="row">
                                 <div class="col-6">
                                     <h6 style="margin-top: 45px; font-weight: 400; text-align: end;">
                                         Price Negotiable
                                     </h6>
-                                    <!-- <label for="name">Price Negotiable<sup>*</sup></label> -->
                                 </div>
                                 <div class="col-6">
                                     <label class="switch">
-                                        <input type="checkbox" id="prodNeg" value="false">
+                                        <input type="checkbox" id="prodNeg" name="negotiable" value="false">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        <!-- Image upload -->
-                        <div class="col-lg-6 col-12">
-                            <label id="labelImg" for="name">Product Images<sup>*</sup></label>
-                            <input type="file" multiple accept="image/*" style="display: none;" id="prodImg" />
-                            <input type="button" id="new-upload-btn" value="Choose files"
-                                style="width: 100%; background-color: white;"
-                                onclick="document.getElementById('prodImg').click();" />
-                        </div>
-                        <div class="col-lg-6 col-12 max-img-mq">
-                            <span>Choose upto maximum 3 images</span>
-                        </div>
-                        <!-- Submit -->
                         <div class="col-12" style="margin-top: 40px; text-align: center; margin-bottom: 60px;">
-                            <input class="btn" type="button" value="Submit" id="submit-btn" style="color:white" />
+                            <input class="btn" type="submit" value="Submit" id="submit-btn" style="color:white" onclick="submitProduct()" />
                         </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6 order-lg-1 d-none d-lg-block"
-                    style="background: url('./images/NewCapture.PNG') center center; background-image: contain; background-repeat: no-repeat; background-size: 750px 500px;">
-                </div>
-            </div>
-        </div>
-    </div>
 
+                       
+                    </form>
+
+            <script>
+                // Define the Firebase configuration
+                var firebaseConfig = {
+                    apiKey: "AIzaSyD1ZXf5jC_AZZJ-oCvX9VWc-Dg1aF_Jz1o",
+                authDomain: "pragati-web-app.firebaseapp.com",
+                databaseURL: "https://pragati-88314-default-rtdb.firebaseio.com",
+                projectId: "pragati-web-app",
+                storageBucket: "pragati-web-app.appspot.com",
+                messagingSenderId: "1072948419095",
+                appId: "1:1072948419095:web:d02d9b70d4873568170515",
+                measurementId: "G-8K6QW4YXMX"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+                var database = firebase.database();
+
+                function submitProduct() {
+                    event.preventDefault();
+                    var name = document.getElementById('prodName').value;
+                    var category = document.getElementById('categoryList').value;
+                    var description = document.getElementById('prodDesc').value;
+                    var dlink = document.getElementById('Dlink').value;
+                    var price = document.getElementById('prodPrice').value;
+                    var negotiable = document.getElementById('prodNeg').checked;
+
+                    database.ref('products').push().set({
+                        name: name,
+                        category: category,
+                        description: description,
+                        price: price,
+                        dlink: dlink,
+                        negotiable: negotiable
+                    }).then(function() {
+                        alert("Product added successfully!");
+                        location.reload();
+                    }).catch(function(error) {
+                        console.error(error);
+                        alert("Error adding product: " + error.message);
+                    });
+                }
+            </script>
     <!-- Footer -->
     <footer>
         <div class="col-12" style="padding: 30px 0px; font-weight: bolder;">
@@ -215,9 +251,7 @@
         crossorigin="anonymous"></script>
 
         <script>
-            function logout(event) {
-        localStorage.removeItem("token");
-    }
+            
         </script>
 
 </body>
