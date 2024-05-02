@@ -87,7 +87,6 @@
         </div>
     </nav>
     <!-- End of Navbar -->
-
     <div class="container-fluid" style="background-color: #faf1ed; padding-bottom: 100px;">
         <div class="row">
             <div class="col-12" style="text-align: center;">
@@ -97,27 +96,111 @@
                 </h5>
             </div>
         </div>
+    <!-- HTML Structure -->
+<!-- HTML Structure -->
 
-        <div class="row" style="padding-top: 30px;">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-6">
-                <input type="text" id="prodSearch" name="prodSearch" style="width: 100%; position: relative;"
-                    placeholder="Search" title="Search for product" />
-                <i class="fa fa-search" style="
+    <!-- Search Bar -->
+    <div class="row" style="padding-top: 30px;">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <input type="text" id="prodSearch" name="prodSearch" style="width: 100%; position: relative;"
+                placeholder="Search" title="Search for product" oninput="searchProduct()" />
+            <i class="fa fa-search" style="
               font-size: 18px;
               color: #961e47;
               position: absolute;
               transform: translate(-32px, 16px);
             "></i>
-            </div>
-            <div class="col-lg-3"></div>
         </div>
-
-        <!-- Dynamically added cards -->
-        <div id="buy-products"></div>
-
+        <div class="col-lg-3"></div>
     </div>
 
+    <!-- Product List Container -->
+    <div id="productList" class="row" style="padding-top: 30px;"></div>
+
+    <!-- Firebase Initialization -->
+    <!-- Include the Firebase SDK (replace with the latest version) -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
+<script>
+    // Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyD1ZXf5jC_AZZJ-oCvX9VWc-Dg1aF_Jz1o",
+                authDomain: "pragati-web-app.firebaseapp.com",
+                databaseURL: "https://pragati-88314-default-rtdb.firebaseio.com",
+                projectId: "pragati-web-app",
+                storageBucket: "pragati-web-app.appspot.com",
+                messagingSenderId: "1072948419095",
+                appId: "1:1072948419095:web:d02d9b70d4873568170515",
+                measurementId: "G-8K6QW4YXMX"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Search product function
+    function searchProduct() {
+        var searchText = document.getElementById("prodSearch").value.trim().toLowerCase();
+        var productList = document.getElementById("productList");
+        productList.innerHTML = ""; // Clear previous results
+
+        var productsRef = firebase.database().ref('products');
+        productsRef.orderByChild('name').startAt(searchText).endAt(searchText + '\uf8ff')
+            .on('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var product = childSnapshot.val();
+
+                    // Create product card container
+                    var cardDiv = document.createElement('div');
+                    cardDiv.classList.add('card', 'mb-3');
+
+                    // Product image
+                    // var imgElement = document.createElement('img');
+                    // imgElement.src = product.dlink;
+                    // imgElement.classList.add('card-img-top');
+                    // imgElement.alt = product.name;
+                    // cardDiv.appendChild(imgElement);
+
+                    // Card body
+                    var cardBodyDiv = document.createElement('div');
+                    cardBodyDiv.classList.add('card-body');
+
+                    // Product title
+                    var titleElement = document.createElement('h5');
+                    titleElement.classList.add('card-title');
+                    titleElement.textContent = 'Product Name: '+product.name;
+                    cardBodyDiv.appendChild(titleElement);
+
+                    // Product description
+                    var descElement = document.createElement('p');
+                    descElement.classList.add('card-text');
+                    descElement.textContent = 'Product Description: '+product.description;
+                    cardBodyDiv.appendChild(descElement);
+                
+                    var titleElement = document.createElement('p');
+                    titleElement.classList.add('card-dlink');
+                    titleElement.textContent = 'Product Photos: '+ product.dlink;
+                    cardBodyDiv.appendChild(titleElement);
+
+                    // Product price
+                    var priceElement = document.createElement('p');
+                    priceElement.classList.add('card-text');
+                    priceElement.textContent = ' Product Price: Rs.' + product.price;
+                    cardBodyDiv.appendChild(priceElement);
+
+                    // Append card body to card container
+                    cardDiv.appendChild(cardBodyDiv);
+
+                    // Append product card to product list
+                    productList.appendChild(cardDiv);
+                });
+            });
+    }
+</script>
+
+
+    </div>
     <!-- Footer -->
     <footer>
         <div class="col-12" style="padding: 30px 0px; font-weight: bolder;">
