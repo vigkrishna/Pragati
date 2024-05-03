@@ -5,6 +5,9 @@
 <p align="justify">Apart from making money, they can access women-centric news, raise questions, doubts and difficulties which otherwise they are not able to clarify, thus paving way to increase intellectual curiosity and self-awareness. Our aim is to expand the reach of rural heritage both locally and amongst the urban too, thus bridging the gap between societies. </p>
 
 
+# site is live at : pragatii.netlify.app
+
+
 
 
 
