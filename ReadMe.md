@@ -1,11 +1,41 @@
-# Pragati ~ Progress begins at home
+# Pragati ~ Progress Begins at Home
 
-<p align="justify">Pragati is an online platform that empowers rural housewives to earn money by selling their own authentic self-made products from home & providing reliable services on the go. There are various applications involving e-commerce portals to buy products or exchange old goods for new ones. But, currently, there is no such e-commerce innovation, targeting the backward class, that actually provides a platform to let village-women apply their self-learnt skills to use & start their business. While there are several means and opportunities for urban women to earn, the rural kind is often left to struggle.</p>
+**Live Site:** 🌐 [pragatii.netlify.app](https://pragatii.netlify.app)
 
-<p align="justify">Apart from making money, they can access women-centric news, raise questions, doubts and difficulties which otherwise they are not able to clarify, thus paving way to increase intellectual curiosity and self-awareness. Our aim is to expand the reach of rural heritage both locally and amongst the urban too, thus bridging the gap between societies. </p>
+---
+
+## 📖 Overview
+
+**Pragati** is an online platform built to **empower rural housewives** by enabling them to sell **authentic self-made products** and offer **local services** from the comfort of their homes. Unlike conventional e-commerce platforms that cater mainly to urban demographics, Pragati focuses on uplifting **underrepresented rural women**, providing them the tools and visibility needed to monetize their traditional skills.
+
+In addition to economic independence, Pragati fosters a space where women can stay updated with relevant news and raise questions or concerns in a supportive community.
+
+---
+
+## 🌟 Key Features
+
+- 🛍️ **Sell Homemade Products** – List and sell handmade crafts, textiles, foods, and more.
+- 🔄 **Product Exchange System** – Swap old items for new ones via the portal.
+- 📰 **Women-Centric News** – Read curated, relevant updates on finance, health, and rights.
+- ❓ **Ask & Discuss** – Ask questions, share doubts, and receive community support.
+- 🌐 **Bridge the Urban-Rural Gap** – Showcase rural heritage to urban consumers and promote inclusivity.
+
+---
+
+## ⚙️ Tech Stack
+
+| Category        | Technology             |
+|----------------|------------------------|
+| Frontend       | HTML5, CSS3, JavaScript |
+| Backend        | Node.js (Express.js)    |
+| Database       | Firebase Realtime DB    |
+| Authentication | Firebase Auth           |
+| Hosting        | Netlify (Frontend)      |
+
+---
 
 
-# Site is live at : pragatii.netlify.app
+
 
 
 
